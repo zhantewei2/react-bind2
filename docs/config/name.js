@@ -1,9 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var queueName = exports.queueName = '_zQueue';
-var arrAppendName = exports.arrAppendName = '$ztwfn';
-var containerName = exports.containerName = '$ztwContainerName';
-var hostname = exports.hostname = '$ztwService';
+export const queueName='_zQueue';
+export const arrAppendName='$ztwfn';
+export const containerName='$ztwContainerName';
+export const hostname='$ztwService';

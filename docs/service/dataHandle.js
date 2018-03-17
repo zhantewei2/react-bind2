@@ -1,94 +1,72 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _subject = require('./subject');
-
-var _subject2 = _interopRequireDefault(_subject);
-
-var _name = require('../config/name');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+import Subject from './subject';
+import {arrAppendName,containerName} from '../config/name';
 
 /*
     listener data change;
  */
 
-var dataHandle = function dataHandle(originData) {
-    var _this = this;
 
-    _classCallCheck(this, dataHandle);
-
-    var mainSub = new _subject2.default();
-    var that = this;
-    this.mainSub = mainSub;
-    var checkArr = {
-        push: function push(value) {
-            mainSub.next();
-            that.checkData(value);
-        },
-        pop: function pop(value) {
-            mainSub.next();
-        },
-        shift: function shift(value) {
-            mainSub.next();
-        },
-        unshift: function unshift(value) {
-            that.checkData(value);
-            mainSub.next();
-        },
-        splice: function splice(pos, count, value) {
-            this.checkData(value);
-            mainSub.next();
-        },
-        reverse: function reverse() {
-            mainSub.next();
-        }
-    };
-
-    this.defineProperty = function (data, key) {
-        var value = data[key];
-        _this.checkData(value);
-        Object.defineProperty(data, key, {
-            set: function set(v) {
-                mainSub.next(v);
-                that.checkData(v);
-                value = v;
+class dataHandle{
+    constructor(originData){
+        const mainSub=new Subject();
+        const that=this;
+        this.mainSub=mainSub;
+        const checkArr={
+            push:function(value){
+                mainSub.next();
+                that.checkData(value)
             },
-            get: function get() {
-                return value;
+            pop:function(value){
+                mainSub.next();
+            },
+            shift:function(value){mainSub.next()},
+            unshift:function(value){
+                that.checkData(value);
+                mainSub.next();
+            },
+            splice:function(pos,count,value){
+                this.checkData(value);
+                mainSub.next();
+            },
+            reverse:function(){
+                mainSub.next();
             }
-        });
-    };
+        };
 
-    this.defineObj = function (data) {
-        Object.keys(data).forEach(function (key) {
-            return _this.defineProperty(data, key);
-        });
-    };
+        this.defineProperty=(data,key)=>{
+            let value=data[key];
+            this.checkData(value);
+            Object.defineProperty(data,key,{
+                set:v=>{
+                    mainSub.next(v);
+                    that.checkData(v);
+                    value=v;
+                },
+                get:()=>value
+            })
+        };
 
-    this.checkData = function (data) {
-        if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
-            if (data instanceof Array) {
-                data[_name.arrAppendName] = checkArr;
-                data.forEach(function (v) {
-                    return _this.checkData(v);
-                });
-            } else {
-                _this.defineObj(data);
+        this.defineObj=data=>{
+            Object.keys(data).forEach(key=>this.defineProperty(data,key));
+        };
+
+        this.checkData=(data)=>{
+            if(typeof data === 'object'){
+                if(data instanceof Array){
+                    data[arrAppendName]=checkArr;
+                    data.forEach(v=>this.checkData(v));
+                }else{
+                    this.defineObj(data);
+                }
             }
-        }
-    };
-    this.checkData(originData);
-};
+        };
+        this.checkData(originData);
+    }
+}
+export default dataHandle;
 
-exports.default = dataHandle;
+
+
 
 // class dataHandle{
 //     constructor(data){

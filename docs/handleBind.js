@@ -1,23 +1,16 @@
-'use strict';
+import {queueName} from  './config/name';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (bindFn) {
-    window[_name.queueName] = [];
-    window._zInterval = setInterval(function () {
-        if (window[_name.queueName].length) {
-            window[_name.queueName].forEach(function (sourceComponent) {
-                try {
-                    sourceComponent.forceUpdate();
-                } catch (e) {}
+import './defineArray';
+export default function (bindFn) {
+    window[queueName] = [];
+    window._zInterval = setInterval(() => {
+        if (window[queueName].length) {
+            window[queueName].forEach(sourceComponent => {
+                try{
+                    sourceComponent.forceUpdate()
+                }catch(e){}
             });
-            window[_name.queueName] = [];
+            window[queueName] = [];
         }
     }, 1);
-};
-
-var _name = require('./config/name');
-
-require('./defineArray');
+}

@@ -1,78 +1,70 @@
-'use strict';
+import {arrAppendName} from './defineArray';
+import {appendCheck} from './config/config';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _defineArray = require('./defineArray');
 
-var _config = require('./config/config');
+export default (that,bindObj)=>{
 
-exports.default = function (that, bindObj) {
-
-    var defaultOne = function defaultOne(obj, keyName) {
-        var value = obj[keyName];
-        Object.defineProperty(obj, keyName, {
-            get: function get() {
+    const defaultOne=(obj,keyName)=>{
+        let value=obj[keyName];
+        Object.defineProperty(obj,keyName,{
+            get:()=>{
                 return value;
             },
-            set: function set(val) {
-                if (val === value) return;
-                value = val;
+            set:(val)=>{
+                if(val===value)return;
+                value=val;
                 traverse(val);
-                (0, _config.appendCheck)(that);
+                appendCheck(that);
             }
-        });
+        })
     };
     //define arr
 
-    var checkArr = {
-        push: function push(value) {
-            (0, _config.appendCheck)(that);
+    const checkArr={
+        push:function(value){
+            appendCheck(that);
             traverse(value);
         },
-        pop: function pop(value) {
-            (0, _config.appendCheck)(that);
+        pop:function(value){
+            appendCheck(that);
         },
-        shift: function shift(value) {
-            (0, _config.appendCheck)(that);
-        },
-        unshift: function unshift(value) {
-            (0, _config.appendCheck)(that);
+        shift:function(value){appendCheck(that)},
+        unshift:function(value){
+            appendCheck(that);
             traverse(value);
         },
-        splice: function splice(pos, count, value) {
-            if (value) traverse(value);
-            (0, _config.appendCheck)(that);
+        splice:function(pos,count,value){
+            if(value)traverse(value);
+            appendCheck(that);
         },
-        reverse: function reverse() {
-            (0, _config.appendCheck)(that);
+        reverse:function(){
+            appendCheck(that);
         }
 
+
     };
 
-    var defaultArr = function defaultArr(arr) {
-        arr[_defineArray.arrAppendName] = checkArr;
-        arr.forEach(function (arrItem) {
-            return traverse(arrItem);
-        });
+    const defaultArr=(arr)=>{
+        arr[arrAppendName]=checkArr;
+        arr.forEach(arrItem=>traverse(arrItem));
     };
 
-    function traverse(obj) {
-        if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') return;
-        if (!(obj instanceof Array)) {
-            for (var key in obj) {
-                defaultOne(obj, key);
+    function traverse(obj){
+        if(typeof obj !== 'object')return;
+        if(!(obj instanceof Array)){
+            for(let key in obj){
+                defaultOne(obj,key);
                 traverse(obj[key]);
             }
             Object.seal(obj);
-        } else {
+        }else{
             defaultArr(obj);
         }
     };
 
     traverse(bindObj);
     return bindObj;
-};
+
+}

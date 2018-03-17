@@ -54,6 +54,9 @@ export default (that,bindObj)=>{
     function traverse(obj){
         if(typeof obj !== 'object')return;
         if(!(obj instanceof Array)){
+            //is react component:
+            if(obj.$$typeof)return;
+
             Object.keys(obj).forEach(key=>{
                 defaultOne(obj,key);
                 traverse(obj[key]);

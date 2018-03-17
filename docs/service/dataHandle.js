@@ -56,6 +56,8 @@ class dataHandle{
                     data[arrAppendName]=checkArr;
                     data.forEach(v=>this.checkData(v));
                 }else{
+                    //is react component:
+                    if(data.$$typeof)return ;
                     this.defineObj(data);
                 }
             }

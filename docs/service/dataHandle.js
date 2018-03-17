@@ -51,7 +51,7 @@ class dataHandle{
         };
 
         this.checkData=(data)=>{
-            if(typeof data === 'object'){
+            if(data && typeof data === 'object'){
                 if(data instanceof Array){
                     data[arrAppendName]=checkArr;
                     data.forEach(v=>this.checkData(v));

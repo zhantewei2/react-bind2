@@ -52,7 +52,7 @@ export default (that,bindObj)=>{
     };
 
     function traverse(obj){
-        if(typeof obj !== 'object')return;
+        if(!obj || typeof obj !== 'object')return;
         if(!(obj instanceof Array)){
             //is react component:
             if(obj.$$typeof)return;

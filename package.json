@@ -1,0 +1,47 @@
+{
+  "_from": "react-bind2",
+  "_id": "react-bind2@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-s9C7d/+MDfaFnXL5Olpztl2OH+TUwyLVRGB0KNTebIMEmWQKhmejq4EJ8FJXrFzEYrqEN4wvlsUWx0/JORdNYA==",
+  "_location": "/react-bind2",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "react-bind2",
+    "name": "react-bind2",
+    "escapedName": "react-bind2",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-bind2/-/react-bind2-0.0.2.tgz",
+  "_shasum": "9acd2ef1596cd1d455fda706e511317dae0884c4",
+  "_spec": "react-bind2",
+  "_where": "D:\\react\\my-app",
+  "author": {
+    "name": "zhantewei"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "babel-preset-env": "^1.6.1"
+  },
+  "deprecated": false,
+  "description": "react bind data",
+  "keywords": [
+    "react",
+    "bind",
+    "data"
+  ],
+  "license": "ISC",
+  "main": "lib/index.js",
+  "name": "react-bind2",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.4"
+}

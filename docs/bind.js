@@ -1,5 +1,5 @@
-import {arrAppendName} from './defineArray';
-import {appendCheck} from './config/config';
+import {arrAppendName} from './defineArray.js';
+import {appendCheck} from './config/config.js';
 
 
 
@@ -54,10 +54,10 @@ export default (that,bindObj)=>{
     function traverse(obj){
         if(typeof obj !== 'object')return;
         if(!(obj instanceof Array)){
-            for(let key in obj){
+            Object.keys(obj).forEach(key=>{
                 defaultOne(obj,key);
                 traverse(obj[key]);
-            }
+            })
             Object.seal(obj);
         }else{
             defaultArr(obj);

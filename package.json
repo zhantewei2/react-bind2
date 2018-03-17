@@ -38,10 +38,10 @@
     "data"
   ],
   "license": "ISC",
-  "main": "docs/index.js",
+  "main": "lib/index.js",
   "name": "react-bind2",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

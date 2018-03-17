@@ -1,4 +1,4 @@
-import {queueName} from  './config/name';
+import {queueName} from  './config/name.js';
 
 import './defineArray';
 export default function (bindFn) {

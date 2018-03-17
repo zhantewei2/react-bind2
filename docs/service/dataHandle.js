@@ -1,5 +1,5 @@
-import Subject from './subject';
-import {arrAppendName,containerName} from '../config/name';
+import Subject from './subject.js';
+import {arrAppendName,containerName} from '../config/name.js';
 
 /*
     listener data change;

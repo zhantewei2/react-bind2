@@ -1,4 +1,4 @@
-import BindData from './bind';
-import initBindData from './handleBind';
+import BindData from './bind.js';
+import initBindData from './handleBind.js';
 
 export {initBindData,BindData};

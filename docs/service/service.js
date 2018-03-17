@@ -1,5 +1,5 @@
-import {hostname} from '../config/name';
-import dataHandle from './dataHandle';
+import {hostname} from '../config/name.js';
+import dataHandle from './dataHandle.js';
 
 class Service{
     constructor() {
